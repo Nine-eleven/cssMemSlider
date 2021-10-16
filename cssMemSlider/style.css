@@ -1,38 +1,148 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    transition: all 0.3s linear;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.3s linear;
+}
   
-  html {
-    font-size: 10px;
-    font-family: 'Roboto', sans-serif;
-    margin: 0 auto;
-  }
+html {
+  font-size: 10px;
+  font-family: 'Roboto', sans-serif;
+  margin: 0 auto;
+}
   
-  body {
-    @include flex($direction: column);
-    background-color: $white;
-    @include font($size: 2.4rem, $height: 28.13px, $weight: 300);
-    color: $black;
-  }
+body {
+  background-color: black;
+}
   
-  #root {
-    width: 100%;
-  }
+#root {
+  width: 100%;
+}
   
-  button {
+button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+input {
     outline: none;
-    border: none;
-    background-color: transparent;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-  input {
-    outline: none;
-  }
-  select {
-    cursor: pointer;
-  }
+    display: none;
+}
+select {
+  cursor: pointer;
+}
+
+.wrap {
+  width: 60vw;
+  max-width: 670px;
+  height: auto;
+  margin: 1rem auto 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
+
+.slider {
+ height: 500px;
+ width: 100%;
+ overflow: hidden;
+ position: relative;
+}
+.slides {
+ height: 100%;
+ width: 100%;
+ position: absolute;
+ opacity: 0;
+ background-size: contain;
+ background-position: center;
+ background-repeat: no-repeat;
+ transition: 1s;
+ transform:scale(0.1) skew(90deg, 20deg)
+}
+
+.slide-1 {
+  background-image: url(./images/mem-1.jpg);
+}
+
+.slide-2 {
+  background-image: url(./images/mem-2.jpg);
+}
+
+.slide-3 {
+  background-image: url(./images/mem-3.jpg);
+}
+
+.slide-4 {
+  background-image: url(./images/mem-4.jpeg);
+}
+
+.slider-information {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.slide-descriptions {
+  min-height: 50px;
+  min-width: 50%;
+  color: white;
+  font-size: 2rem;
+  position: relative;
+}
+
+.slide-descriptions__description {
+  position: absolute;
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.control > label {
+ cursor: pointer;
+ display: inline-block;
+ height: 8px;
+ margin: 10px;
+ position: relative;
+ width: 8px;
+ border-radius: 20%;
+}
+
+.control > label:hover {
+  background: blue;
+  opacity: 0.3;
+}
+
+.control > label::after {
+ border: 2px solid rgb(247, 243, 24);
+ content: " ";
+ display: block;
+ height: 12px;
+ left: -4px;
+ position: absolute;
+ top: -4px;
+ width: 12px;
+ border-radius: 20%;
+}
+
+#slide-point-1:checked ~ .slider > .slides:nth-child(1),
+#slide-point-2:checked ~ .slider > .slides:nth-child(2),
+#slide-point-3:checked ~ .slider > .slides:nth-child(3),
+#slide-point-4:checked ~ .slider > .slides:nth-child(4) {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#slide-point-1:checked ~ .slider-information .slide-descriptions > .slide-descriptions__description:nth-child(1),
+#slide-point-2:checked ~ .slider-information .slide-descriptions > .slide-descriptions__description:nth-child(2),
+#slide-point-3:checked ~ .slider-information .slide-descriptions > .slide-descriptions__description:nth-child(3),
+#slide-point-4:checked ~ .slider-information .slide-descriptions > .slide-descriptions__description:nth-child(4) {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+#slide-point-1:checked ~ .slider-information .control > label:nth-child(1)::after,
+#slide-point-2:checked ~ .slider-information .control > label:nth-child(2)::after,
+#slide-point-3:checked ~ .slider-information .control > label:nth-child(3)::after,
+#slide-point-4:checked ~ .slider-information .control > label:nth-child(4)::after {
+  border: 2px solid rgb(255, 255, 255);
+  background: rgb(240, 240, 240);
+}
