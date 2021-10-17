@@ -1,2 +1,2 @@
 # cssMemSlider
-# Nine-eleven
+# by Nine-eleven
