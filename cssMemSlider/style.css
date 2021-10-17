@@ -24,12 +24,28 @@ button {
   border: none;
   background-color: transparent;
 }
+
+a {
+  text-decoration: none;
+}
+
 input {
     outline: none;
     display: none;
 }
 select {
   cursor: pointer;
+}
+
+header {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+header > * {
+  color: wheat;
 }
 
 .wrap {
@@ -43,20 +59,21 @@ select {
 }
 
 .slider {
- height: 500px;
+ height: 50rem;
  width: 100%;
  overflow: hidden;
- position: relative;
+ display: flex;
+ flex-direction: column;
 }
 .slides {
  height: 100%;
  width: 100%;
- position: absolute;
- opacity: 0;
+ display: none;
  background-size: contain;
  background-position: center;
  background-repeat: no-repeat;
- transform: translate(100%)
+ animation-duration: 0.6s;
+ animation-name: slidein-right;
 }
 
 .slide-1 {
@@ -82,7 +99,7 @@ select {
 }
 
 .slide-descriptions {
-  min-height: 50px;
+  min-height: 50%;
   min-width: 50%;
   color: white;
   font-size: 2rem;
@@ -90,9 +107,9 @@ select {
 }
 
 .slide-descriptions__description {
-  position: absolute;
-  opacity: 0;
-  transform: translateX(-100%);
+  display: none;
+  animation-duration: 1s;
+  animation-name: slidein-down;
 }
 
 .control > label {
@@ -110,6 +127,10 @@ select {
   opacity: 0.3;
 }
 
+.control > label:active {
+  height: 20px;
+}
+
 .control > label::after {
  border: 2px solid rgb(247, 243, 24);
  content: " ";
@@ -125,17 +146,12 @@ select {
 #slide-point-1:checked ~ .slider > .slides:nth-child(1),
 #slide-point-2:checked ~ .slider > .slides:nth-child(2),
 #slide-point-3:checked ~ .slider > .slides:nth-child(3),
-#slide-point-4:checked ~ .slider > .slides:nth-child(4) {
-  opacity: 1;
-  transform: translate(0, 0);
-}
-
+#slide-point-4:checked ~ .slider > .slides:nth-child(4),
 #slide-point-1:checked ~ .slider-information .slide-descriptions > .slide-descriptions__description:nth-child(1),
 #slide-point-2:checked ~ .slider-information .slide-descriptions > .slide-descriptions__description:nth-child(2),
 #slide-point-3:checked ~ .slider-information .slide-descriptions > .slide-descriptions__description:nth-child(3),
 #slide-point-4:checked ~ .slider-information .slide-descriptions > .slide-descriptions__description:nth-child(4) {
-  opacity: 1;
-  transform: translateX(0);
+  display: block;
 }
 
 #slide-point-1:checked ~ .slider-information .control > label:nth-child(1)::after,
@@ -166,4 +182,31 @@ select {
     align-self: center;
   }
 
+}
+
+
+@keyframes slidein-right {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+
+@keyframes slidein-down {
+  from {
+    margin-top: -50%;
+  }
+
+  25% {
+    color:rgb(247, 243, 24);
+  }
+
+  to {
+    margin-top: 0%;
+  }
 }
